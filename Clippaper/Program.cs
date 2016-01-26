@@ -27,9 +27,11 @@ namespace Clippaper
 
         public static MenuItem miClear = new MenuItem("Clear Image", (s, e) => { ClearImage(); });
 
+        public static MenuItem miNotify = new MenuItem("Notifications", (s, e) => { SilentMode(); });
+
         public static MenuItem miExit = new MenuItem("Exit", (s, e) => { Application.Exit(); });
 
-        public static ContextMenu cmMain = new ContextMenu(new MenuItem[] { miSetBack, miSetStyle, miClear, miExit });
+        public static ContextMenu cmMain = new ContextMenu(new MenuItem[] { miSetBack, miSetStyle, miClear, miNotify, miExit });
 
         public static NotifyIcon icon;
 
@@ -41,6 +43,8 @@ namespace Clippaper
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            miNotify.Checked = true;
 
             using (icon = new NotifyIcon())
             {
@@ -98,6 +102,12 @@ namespace Clippaper
         private static void ClearImage()
         {
             WallpaperHandler.currentImage = null;
+        }
+
+        private static void SilentMode()
+        {
+            miNotify.Checked = !miNotify.Checked;
+            WallpaperHandler.notify = miNotify.Checked;
         }
     }
 }
