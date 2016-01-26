@@ -30,6 +30,8 @@ namespace Clippaper
         private static MenuItem mItem;
         private static NotifyIcon nIcon;
 
+        public static bool notify = true;
+
         public WallpaperHandler(ref MenuItem mi, ref NotifyIcon ni)
         {
             mItem = mi;
@@ -73,7 +75,8 @@ namespace Clippaper
                     if (iformat == ImageFormat.Bmp || iformat == ImageFormat.Gif || iformat == ImageFormat.Jpeg || iformat == ImageFormat.Png || iformat.Guid == iWebFormat.Guid)
                     {
                         mItem.Enabled = true;
-                        nIcon.ShowBalloonTip(3);
+                        if (notify)
+                            nIcon.ShowBalloonTip(3);
                         currentImage = i;
                     }
                     else
